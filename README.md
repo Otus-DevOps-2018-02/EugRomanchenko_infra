@@ -60,3 +60,21 @@ gcloud compute --project=infra-197918 firewall-rules create default-puma-server\
 ### Informations for access to our application from Internet
 testapp_IP=35.204.40.219
 testapp_port=9292
+## Homework-7 (terraform-1)
+### For create simple infrastructure into GCP
+* Install Terraform from https://www.terraform.io/downloads.html
+* Clone this Git repo
+```
+git clone -b terraform-1 git@github.com:Otus-DevOps-2018-02/EugRomanchenko_infra.git
+```
+* Move into folder terraform
+* Create file terraform.tfvars based on our GCP value from terraform.tfvars.example"
+* Execute two command
+```
+terraform plan
+terraform apply
+```
+* After this you will see output variable app_external_ip 
+* Open our web browser and enter $app_external_ip:9292 into address prompt 
+### Homework-7 with *
+When you modify GCP project metadata with Terraform, your existing ssh-keys will remove because Terraform don't known about them.
