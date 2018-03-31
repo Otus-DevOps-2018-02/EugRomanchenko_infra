@@ -77,4 +77,27 @@ terraform apply
 * After this you will see output variable app_external_ip 
 * Open our web browser and enter $app_external_ip:9292 into address prompt 
 ### Homework-7 with *
+We add multiply ssh-keys into GCP project metadata through Terraform
 When you modify GCP project metadata with Terraform, your existing ssh-keys will remove because Terraform don't known about them.
+### Homework-7 with **
+* Install Terraform from https://www.terraform.io/downloads.html
+* Clone this Git repo
+```
+git clone -b terraform-1 git@github.com:Otus-DevOps-2018-02/EugRomanchenko_infra.git
+```
+* Move into folder terraform
+* Create file terraform.tfvars based on our GCP value from terraform.tfvars.example"
+* Execute two command
+```
+terraform plan
+terraform apply
+```
+* After this you will see third output variables. One of thih is lb_external_ip
+* Open our web browser and enter $lb_external_ip:9292 into address prompt
+* Connect to one of two application instance (output variable app_external_ip) 
+* Execute command
+```
+sudo systemctl stop puma.service
+```
+* Try again open our web browser and enter $lb_external_ip:9292 into address prompt
+
