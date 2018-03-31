@@ -49,3 +49,4 @@ resource "google_compute_global_forwarding_rule" "reddit-app-forwarding-rule" {
   target     = "${google_compute_target_http_proxy.reddit-app-proxy.self_link}"
   port_range = "80"
 }
+
