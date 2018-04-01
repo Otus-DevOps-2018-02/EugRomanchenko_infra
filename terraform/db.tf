@@ -1,5 +1,4 @@
 resource "google_compute_instance" "db" {
-  count        = "${var.count}"
   name         = "reddit-db"
   machine_type = "g1-small"
   zone         = "${var.zone}"
@@ -20,6 +19,7 @@ resource "google_compute_instance" "db" {
   metadata {
     ssh-keys = "appuser:${file(var.public_key_path)}"
   }
+}
 
 resource "google_compute_firewall" "firewall_mongo" {
   name    = "allow-mongo-default"
@@ -30,6 +30,6 @@ resource "google_compute_firewall" "firewall_mongo" {
     ports    = ["27017"]
   }
 
-  target_tags   = ["reddit-db"]
+  target_tags = ["reddit-db"]
   source_tags = ["reddit-app"]
 }
