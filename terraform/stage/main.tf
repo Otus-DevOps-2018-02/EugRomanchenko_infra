@@ -6,7 +6,7 @@ provider "google" {
 
 module "vpc" {
   source        = "../modules/vpc"
-  source_ranges = ["${var.our_external_ip}"]
+  source_ranges = ["0.0.0.0"]
 }
 
 module "app" {

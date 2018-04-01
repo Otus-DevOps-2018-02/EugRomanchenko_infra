@@ -30,6 +30,3 @@ variable db_disk_image {
   default     = "reddit-db-base"
 }
 
-variable our_external_ip {
-  description = "Our external ip address"
-}
