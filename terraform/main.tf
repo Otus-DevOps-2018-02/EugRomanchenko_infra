@@ -13,5 +13,5 @@ module "db" {
   source = "modules/db"
   public_key_path = "${var.public_key_path}"
   zone = "${var.zone}"
-  app_disk_image = "${var.db_disk_image}"
+  db_disk_image = "${var.db_disk_image}"
 }
