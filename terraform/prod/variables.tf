@@ -29,6 +29,7 @@ variable db_disk_image {
   description = "Disk image for reddit db"
   default     = "reddit-db-base"
 }
+
 variable our_external_ip {
   description = "Our external ip address"
 }
