@@ -6,6 +6,7 @@ provider "google" {
 
 module "vpc" {
   source = "modules/vpc"
+  source_ranges = ["93.80.26.6"]
 }
 
 module "app" {
