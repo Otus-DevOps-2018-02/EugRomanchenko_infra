@@ -1,5 +1,4 @@
-project = "your_project_id"
+project = "infra-197918"
 public_key_path = "~/.ssh/appuser.pub"
 private_key_path = "~/.ssh/appuser"
-bucket_name = "test-bucket"
-
+our_external_ip = "$(curl ifconfig.co)"
