@@ -100,4 +100,42 @@ terraform apply
 sudo systemctl stop puma.service
 ```
 * Try again open our web browser and enter $lb_external_ip:9292 into address prompt
-
+## Homework-8 (terraform-2)
+* Clone this Git repo
+```
+git clone -b terraform-2 git@github.com:Otus-DevOps-2018-02/EugRomanchenko_infra.git
+```
+* Move into folder packer
+* 
+```
+packer build -var-file=variables.json app.json
+packer build -var-file=variables.json db.json
+```
+* 
+```
+cd ../terraform
+```
+* Create file terraform.tfvars based on our GCP value and planning GCS bucket name from terraform.tfvars.example"
+* Initialize remote Terraform module storage-bucket
+```
+terraform init
+```
+* Create Google Cloud Sotrage for store terraform.tfstate file
+```
+terraform plan && terraform apply
+```
+* Move into one of two folder prod or stage
+* Change the value of the variable bucket to the value you entered in the previous step in backend.tf file
+* Define our external ip address. For example:
+```
+curl ifconfig.co
+```
+* Create file terraform.tfvars based on our GCP value and received at the previous stage by an external ip address
+* Initialize local module app, vpc and db
+```
+terraform init && terraform get
+```
+* Create test infrasructure
+```
+terraform plan && terraform apply
+```
