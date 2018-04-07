@@ -100,7 +100,7 @@ terraform apply
 sudo systemctl stop puma.service
 ```
 * Try again open our web browser and enter $lb_external_ip:9292 into address prompt
-## Homework-8 (terraform-2)
+### Homework-8 (terraform-2)
 * Clone this Git repo
 ```
 git clone -b terraform-2 git@github.com:Otus-DevOps-2018-02/EugRomanchenko_infra.git
@@ -138,4 +138,27 @@ terraform init && terraform get
 * Create test infrasructure
 ```
 terraform plan && terraform apply
+```
+### Homework-9 (ansible-1)
+## Base homework
+* Create simple Ansible structure and playbook for clone remote Git repo
+* Running simple playbook
+```
+ansible app clone.yml
+```
+* Make shure that nothing was change
+* Running command
+```
+ansible app -m command -a "rm -rf ~/reddit"
+```
+* After that
+```
+ansible app clone.yml
+```
+* You can see that the change were made
+* We tested this property ansible as the immmutable
+## homework with *
+For use inventory.json
+```
+ansible -i inventory.py all -m ping
 ```
