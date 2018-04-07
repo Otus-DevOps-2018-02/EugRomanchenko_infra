@@ -27,9 +27,15 @@ resource "google_compute_instance" "db" {
     private_key = "${file(var.private_key_path)}"
   }
 
+  provisioner "file" {
+    source      = "${path.module}/files/mongod.conf"
+    destination = "/tmp/mongod.conf"
+  }
+
   provisioner "remote-exec" {
     inline = [
-      "sudo -- sh -c 'sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf && systemctl restart mongod'",
+      "sudo cp /tmp/mongod.conf /etc/mongod.conf",
+      "sudo systemctl restart mongod",
     ]
   }
 }
