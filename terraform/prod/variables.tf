@@ -33,3 +33,7 @@ variable db_disk_image {
 variable our_external_ip {
   description = "Our external ip address"
 }
+
+variable deploy {
+  decription = "Flag for deploy"
+}

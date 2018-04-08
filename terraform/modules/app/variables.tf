@@ -19,3 +19,8 @@ variable app_disk_image {
 variable reddit_db_addr {
   description = "Internal Mongo DB ip address"
 }
+
+variable deploy {
+  description = "Flag for deploy"
+  default     = "0"
+}
