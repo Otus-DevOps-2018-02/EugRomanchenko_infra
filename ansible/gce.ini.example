@@ -1,0 +1,11 @@
+[gce]
+gce_service_account_email_address = 
+gce_service_account_pem_file_path = 
+gce_project_id = 
+
+[inventory]
+inventory_ip_type = 'external'
+
+[cache]
+cache_patch = ~/.ansible/tmp
+cache_max_age = 300
