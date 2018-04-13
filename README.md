@@ -162,3 +162,17 @@ For use inventory.json
 ```
 ansible -i inventory.py all -m ping
 ```
+### Homework-10 (ansible-2)
+## Base homework
+- We will working into multiple Ansible techniques:
+  - One playbook - one play
+  - One playbook - multiply play
+  - Multiple playbook
+
+- Write Ansible Playbook for using on Packer provisioning
+- Recreate Golden Image using updated Packer Template
+- Recreate Stage environment using Terraform
+- Run Ansible Playbook site.yml for deploing our application
+## homework with *
+- Creaate additional Service Account into GCP with role view GCE
+- Configure Dynamic inventory in Ansible based on gce.py
