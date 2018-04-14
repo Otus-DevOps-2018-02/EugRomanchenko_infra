@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Otus-DevOps-2018-02/EugRomanchenko_infra.svg?branch=ansible-3)](https://travis-ci.org/Otus-DevOps-2018-02/EugRomanchenko_infra)
 # EugRomanchenko_infra
 EugRomanchenko Infra repository
 ## Homework-4 (cloud-bastion)
@@ -139,8 +140,8 @@ terraform init && terraform get
 ```
 terraform plan && terraform apply
 ```
-### Homework-9 (ansible-1)
-## Base homework
+## Homework-9 (ansible-1)
+### Base homework
 * Create simple Ansible structure and playbook for clone remote Git repo
 * Running simple playbook
 ```
@@ -157,13 +158,13 @@ ansible app clone.yml
 ```
 * You can see that the change were made
 * We tested this property ansible as the immmutable
-## homework with *
+### homework with *
 For use inventory.json
 ```
 ansible -i inventory.py all -m ping
 ```
-### Homework-10 (ansible-2)
-## Base homework
+## Homework-10 (ansible-2)
+### Base homework
 - We will working into multiple Ansible techniques:
   - One playbook - one play
   - One playbook - multiply play
@@ -173,6 +174,56 @@ ansible -i inventory.py all -m ping
 - Recreate Golden Image using updated Packer Template
 - Recreate Stage environment using Terraform
 - Run Ansible Playbook site.yml for deploing our application
-## homework with *
+### homework with *
 - Creaate additional Service Account into GCP with role view GCE
 - Configure Dynamic inventory in Ansible based on gce.py
+## Homework-11 (ansible-3)
+### Выполнено ДЗ № 11
+
+ - [x] Основное ДЗ
+ - [x] Задание со *
+ - [x] Задание с **
+
+#### В процессе сделано:
+ - Произведена реструктуризация инфраструктурного Ansible репозитория
+ - Добавлено описание двух окружений stage и prod в Ansible
+ - Была использована комьюнити Ansible role nginx
+ - С помощью Ansible Vault были зашифрованы sensitive конфиги с паролями пользователей 
+ - Для двух окружений было настроено использование Dynamic Inventory
+ - С помощью [trytravis](https://github.com/SethMichaelLarson/trytravis) были настроены дополнительные проверки Ansible, Packer и Terraform конфигураций путем запуска тестовых билдов в Travis CI
+
+#### Как запустить проект:
+ - Cклонировать git репозиторий
+```
+git clone -b ansible-3 git@github.com:Otus-DevOps-2018-02/EugRomanchenko_infra.git
+```
+ - Настроить тестовую инфраструктуру
+```
+cd terraform/stage
+terraform apply
+```
+ - Учитывая значения output переменных настроить inventory файлы ansible/environments/stage/inventory
+ - Выполнить запуск Ansible Playbook
+```
+cd ansible
+ansible-playbook -i environments/stage/inventory playbooks/site.yml
+```
+ - Для задания со * необходимо внести корректные данные в файл ansible/environments/stage/gce.ini.example
+ - Пересоздать тестовую инфраструктуру
+``` 
+cd ../terraform/stage
+terraform destroy
+terraform apply
+```
+ - Выполнить запуск Ansible Playbook
+``` 
+cd ansible/
+ansible-playbook -i environments/stage/gce.py playbooks/site.yml
+```
+
+#### Как проверить работоспособность:
+ - Перейти по ссылке http://$external_ip
+
+#### PR checklist
+ - [x] Выставил label с номером домашнего задания
+ - [x] Выставил label с темой домашнего задания
