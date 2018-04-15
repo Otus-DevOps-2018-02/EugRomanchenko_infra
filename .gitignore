@@ -7,6 +7,7 @@ packer/variables.json
 *.retry
 *gce.ini
 jdauphant.nginx
+ansible-role-mongodb
 vault.key
 # Vagrant & molecule
 .vagrant/
