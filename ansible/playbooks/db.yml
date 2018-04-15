@@ -3,6 +3,7 @@
   hosts:
     - tag_db
     - reddit-db
+    - db
   become: true
 
   roles:
