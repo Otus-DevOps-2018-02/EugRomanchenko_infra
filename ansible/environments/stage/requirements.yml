@@ -4,3 +4,4 @@
 
 - src: https://github.com/EugRomanchenko/ansible-role-mongodb.git
   version: master
+  name: db
