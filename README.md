@@ -227,3 +227,27 @@ ansible-playbook -i environments/stage/gce.py playbooks/site.yml
 #### PR checklist
  - [x] Выставил label с номером домашнего задания
  - [x] Выставил label с темой домашнего задания
+## Выполнено ДЗ № 12
+### В процессе сделано:
+ - Настроено использование Vagrant для локальной разработки Ansible ролей
+ - Настроено тестирование Ansible ролей с использованием Molecule и TestInfra
+ - В шаблонах Packer включено использование Ansible ролей вместо плейбуков
+ - Ansible роль db была вынесена в отдельный git репозиторий [ansible-role-mongodb](https://github.com/EugRomanchenko/ansible-role-mongodb)
+ - Для нее было настроено тестирование посредством запуска тестов с помощью Molecule и TravisCI в GCE
+
+### Как запустить проект:
+ - Склонировать данный git репозиторий
+ - Перейти в директорию ansible и установить отдельную Ansible роль db
+```
+ansible-galaxy install -r environment/stage/requirements.yml
+```
+ - Установить Vagrant
+ - Из директории ansible запустить
+```
+vagrant up
+```
+ 
+### Как проверить работоспособность:
+ - После запуска инфраструктуры с помощью Vagrant перейти в веб браузере по ссылке http://10.10.10.20:9292 и убедиться, что приложение работает
+ - Для задания со * после запуска инфраструктуры с помощью Vagrant перейти в веб браузере по ссылке http://10.10.10.20 и убедиться, что приложение работает
+ - Для задания со * необходимо убедится, что последний билд [ansible-role-mongodb](https://github.com/EugRomanchenko/ansible-role-mongodb) был успешен и что о нем была отправлена нотификация в Slack канал #eugeny_romanchenko
