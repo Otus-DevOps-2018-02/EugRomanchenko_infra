@@ -234,6 +234,7 @@ ansible-playbook -i environments/stage/gce.py playbooks/site.yml
  - В шаблонах Packer включено использование Ansible ролей вместо плейбуков
  - Ansible роль db была вынесена в отдельный git репозиторий [ansible-role-mongodb](https://github.com/EugRomanchenko/ansible-role-mongodb)
  - Для нее было настроено тестирование посредством запуска тестов с помощью Molecule и TravisCI в GCE
+ - Была настроена интеграция Slack с GitHub репозиторием [ansible-role-mongodb](https://github.com/EugRomanchenko/ansible-role-mongodb) для отправки нотификаций о любых изменениях
 
 ### Как запустить проект:
  - Склонировать данный git репозиторий
