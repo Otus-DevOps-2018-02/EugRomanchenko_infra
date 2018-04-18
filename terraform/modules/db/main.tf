@@ -9,7 +9,7 @@ resource "google_compute_instance" "db" {
     }
   }
 
-  tags = ["reddit-db"]
+  tags = ["reddit-db", "db"]
 
   network_interface {
     network       = "default"

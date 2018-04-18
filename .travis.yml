@@ -1,9 +1,44 @@
 dist: trusty
 sudo: required
 language: bash
+env:
+  - ANSIBLE_VER=2.5.0 ANSLINT_VER=3.4.21 PACKER_VER=1.2.1 TERRAFORM_VER=0.11.5 TFLINT_VER=0.5.4
 before_install:
-- curl https://raw.githubusercontent.com/express42/otus-homeworks/2018-02/run.sh |
-  bash
+- curl https://raw.githubusercontent.com/express42/otus-homeworks/2018-02/run.sh | bash
+- touch ~/.ssh/appuser.pub && touch ~/.ssh/appuser
+- cd /tmp
+- curl -O https://releases.hashicorp.com/packer/${PACKER_VER}/packer_${PACKER_VER}_linux_amd64.zip
+- unzip packer_${PACKER_VER}_linux_amd64.zip
+- rm /tmp/packer_${PACKER_VER}_linux_amd64.zip
+- sudo  mv /tmp/packer /usr/bin
+- sudo chmod +x /usr/bin/packer
+- curl -O https://releases.hashicorp.com/terraform/${TERRAFORM_VER}/terraform_${TERRAFORM_VER}_linux_amd64.zip
+- unzip terraform_${TERRAFORM_VER}_linux_amd64.zip
+- rm /tmp/terraform_${TERRAFORM_VER}_linux_amd64.zip
+- sudo mv /tmp/terraform /usr/bin
+- chmod +x /usr/bin/terraform
+- curl -OL https://github.com/wata727/tflint/releases/download/v${TFLINT_VER}/tflint_linux_amd64.zip
+- unzip tflint_linux_amd64.zip
+- rm /tmp/tflint_linux_amd64.zip
+- sudo mv /tmp/tflint /usr/bin
+- sudo chmod +x /usr/bin/tflint
+- sudo pip install ansible==${ANSIBLE_VER} ansible-lint==${ANSLINT_VER}
+- cd ${TRAVIS_BUILD_DIR}
+- packer validate -var-file=packer/variables.json.example packer/app.json
+- packer validate -var-file=packer/variables.json.example packer/db.json
+- cd packer/
+- packer validate -var-file=variables.json.example immutable.json
+- packer validate -var-file=variables.json.example ubuntu16.json
+- cd ${TRAVIS_BUILD_DIR}/ansible
+- ansible-lint playbooks/site.yml --exclude=roles/jdauphant.nginx
+- cd ${TRAVIS_BUILD_DIR}/terraform/stage
+- terraform init -backend=false
+- terraform validate -var-file=terraform.tfvars.example
+- tflint --var-file=terraform.tfvars.example
+- cd ${TRAVIS_BUILD_DIR}/terraform/prod
+- terraform init -backend=false
+- terraform validate -var-file=terraform.tfvars.example
+- tflint --var-file=terraform.tfvars.example
 notifications:
   slack:
     secure: CDiJjMfDo/ZhZBWmU5Lh7mccGqUYBOjqPlCHAhQCelum/mHpg1qYdHI0WfNGZuDl5StJPKOMcZ0NO3Drv+dHcMlxz9oLes5iOEokYhwnxJ/mWabM5UyyYpM/8p0YIJMSLwFU5iT8tgBkS6teQPa6JSpDBJ29PZu+zdLhHdEKKDPiYruDWCUGpGYhMjj3b/wBZn/KUax7CKhSTWX4TcVlWSjiuGQOILPBRtzqiGeY87TBo7HtAkTQZLksF1XqbY4C+1MD157jrHKWq35j9Dn36DfS8o/rrwXG9WONrfDzs8326EvPgUMlz12SGC406K2JkPHegKmy3o69o/uFHsQ68txNZu6y7kziwOh8taXcxor+M/TKb3e9I2RqgxNuKUelbZ93RCBkD5FtC4A4BLbeABbCj2tDOy5ah+0nJ48rHg+lXYKeMuJQtbzmj60DCihJlyf93ILVlL+WadhevYwAkXVl31+1UWB8OvZlNwtlhFwp8OHw3TIOZPf724vDh03gAwq0l9IkbzT38sfxHC9YUMx0rwhqsJXZs3kyLp+3IoP8cn+/2/i5kdZVCxHG6Z5TljqsowNnLQ9T0gWLxikTv4F7y/YnBYmQs6Nw5Hrhj4YS7jqzDJsbMbTdWkUp40vzhJZHDDdblESlq2gnOSERa4rOa7UuLrx3dOw4iLdjnFA=

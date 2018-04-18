@@ -6,3 +6,5 @@ packer/variables.json
 .terraform/
 *.retry
 *gce.ini
+jdauphant.nginx
+vault.key

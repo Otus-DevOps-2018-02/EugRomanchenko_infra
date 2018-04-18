@@ -35,5 +35,6 @@ variable our_external_ip {
 }
 
 variable deploy {
-  decription = "Flag for deploy"
+  description = "Flag for deploy"
+  default = "0"
 }
