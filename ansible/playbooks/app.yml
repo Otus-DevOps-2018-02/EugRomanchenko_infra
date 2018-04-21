@@ -3,6 +3,7 @@
   hosts:
     - tag_app
     - reddit-app
+    - app
   become: true
 
   roles:
